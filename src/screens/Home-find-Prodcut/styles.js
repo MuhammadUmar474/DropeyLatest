@@ -87,6 +87,11 @@ const Styles = StyleSheet.create({
         width: 10, 
         backgroundColor: 'transparent',
     },
+    loader: {
+        alignSelf: 'center',
+        marginTop: 10,
+        bottom: 2,
+    }
 })
 
 export default Styles;

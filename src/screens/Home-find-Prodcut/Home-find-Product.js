@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Dimensions, Image, ImageBackground, TextInput, FlatList, Pressable } from 'react-native';
+import { View, Text, Dimensions, Image, ImageBackground, TextInput, FlatList, Pressable, ActivityIndicator } from 'react-native';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import CheckBox from '@react-native-community/checkbox';
@@ -11,16 +11,39 @@ import styles from './styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ProductCard from '../../components/ProductCard/ProductCard';
 const HomefindProduct = ({navigation}) => {
+    const [data, setdata] = useState([]);
     const [isCheckAll, setIsCheckAll] = useState(false);
     const [searchProduct, setSearchProduct] = useState();
-
+    const [isLoading, setisLoading] = useState(false);
+    const [pageCurrent, setpageCurrent] = useState(1)
     const dispatch = useDispatch();
 
     const items = useSelector((state) => state?.getItems);
-    // console.log("Product items from api in Home Product Screen", items.itemsforProduct.data);
+    console.log("Items ==> ", items)
+    const newdata = items.itemsforProduct.data
     useEffect(() => {
-        dispatch(getItems);
+        setdata(newdata);
+        setisLoading(true)
+        dispatch(getItems(successCallback));
     },[dispatch]);
+
+    const successCallback = () => {
+        // setdata(data.concat(newdata))
+        setisLoading(false)
+    }
+    const renderFooter = () => {
+        return (
+            isLoading ?
+            <View style={styles.loader}>
+                <ActivityIndicator size={'large'} />
+            </View> : null
+        )
+    }
+
+    const handleLoadMore = () => {
+        setpageCurrent(pageCurrent + 1)
+        setisLoading(true)
+    }
     return (
         <View style={styles.container}>
             <View style={{flex: 1}}>
@@ -99,9 +122,12 @@ const HomefindProduct = ({navigation}) => {
                 <View style={{flex: 1, marginTop: hp('-12%')}}>
                     <FlatList
                         showsVerticalScrollIndicator = {false}
-                        data={items.itemsforProduct.data}
+                        data={data}
                         numColumns = {2}
                         renderItem={({item}) => <ProductCard post = {item} isSelected={isCheckAll}/>}
+                        ListFooterComponent={renderFooter}
+                        onEndReached={handleLoadMore}
+                        onEndReachedThreshold={0}
                     />
 
                     </View>

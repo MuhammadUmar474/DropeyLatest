@@ -95,7 +95,7 @@ export const getCategories = async dispatch => {
     }
 }
 
-export const getItems = async dispatch => {
+export const getItems  = ( successCall) => async dispatch => {
     const value = await AsyncStorage.getItem('TokenValue')
     try {
         await axios.get('http://18.116.113.58/api/items', 
@@ -103,11 +103,13 @@ export const getItems = async dispatch => {
             headers: {"Authorization": `Bearer ${value}`}
         })
         .then(response => {
+            successCall && successCall()
             console.log('Items from api action', response?.data)
             return dispatch({
                 type: GET_ITEMS,
                 payload: response?.data,
             });
+            
         });
     } catch (error) {
         console.log(error);

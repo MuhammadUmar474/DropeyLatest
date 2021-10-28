@@ -5,11 +5,14 @@ import ImportListBtn from '../ImportListBtn/ImportListBtn';
 import CheckBox from '@react-native-community/checkbox';
 import styles from './styles';
 
-const ProductCard = ({ post, isSelected }) => {
+const ProductCard = ({ post, isSelected, sucessCallBack }) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   useEffect(() => {
     setToggleCheckBox(isSelected)
-  }, [isSelected])
+  }, [isSelected]);
+  // useEffect(() => {
+  //   successCall && successCall()
+  // }, [toggleCheckBox]);
   console.log("post Picture", post?.picture.id)
   return (
     <TouchableOpacity style={ !toggleCheckBox? styles.cardContainer : styles.cardContainerSelected} 
