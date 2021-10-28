@@ -31,7 +31,6 @@ cardContainerSelected: {
   overflow: 'hidden',
   borderWidth: 2,
   borderColor: '#7054D5',
-  // position: 'absolute'
 },
 logInTxt: { 
   color: '#fff', 

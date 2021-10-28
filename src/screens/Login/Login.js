@@ -91,7 +91,10 @@ async function onFacebookButtonPress() {
         const regx = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
         return regx.test(value)
     }
-
+    const successCallback = () => {
+        setEmail('');
+        setPassword('');
+    }
     const Validation = () => {
         if (!email) {
             setEmailError({ error: true, msg: t('Please enter your email !') });
@@ -105,9 +108,7 @@ async function onFacebookButtonPress() {
             setPasswordError({ error: true, msg: t('Please enter password !') });
             return;
         }
-        dispatch(logIn(email, password))
-        setTimeout(() => {setEmail('');
-        setPassword('');}, 3000);
+        dispatch(logIn(email, password, successCallback))
         
     }
 

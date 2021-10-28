@@ -4,10 +4,14 @@ import styles from './Styles';
 import DropDownPicker from 'react-native-dropdown-picker';
 import SelectableChips from 'react-native-chip/SelectableChips'
 import ButtonComp from '../../components/Button/ButtonComp';
+import { connect, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { filterItems } from '../../redux/actions/auth';
 
 const FilterandSort = ({navigation}) => {
+
+    const dispatch = useDispatch();
 
     const { t, i18n } = useTranslation();
 
@@ -31,15 +35,20 @@ const FilterandSort = ({navigation}) => {
         {label: 'Rupee', value: 'Rupee'}
     ]);
 
+    const filterSubmit = () => {
+        dispatch(filterItems(sort))
+        
+    }
+
     return (
         <View style={styles.container}>
 
             <View style={styles.topView}>
             <TouchableOpacity style={styles.backBtn} onPress={() => navigation.navigate('HomeProduct')}>
-                    <Image
-                        source={require('../../assets/images/arrowback.png')}
-                        style={styles.backArrow}    
-                    />
+                <Image
+                    source={require('../../assets/images/arrowback.png')}
+                    style={styles.backArrow}    
+                />
             </TouchableOpacity>
                 <Text style={styles.sortTxt}>Sort & Filter</Text>
                 
@@ -89,7 +98,7 @@ const FilterandSort = ({navigation}) => {
                     chipStyleSelected={{backgroundColor: '#FFFFFF', borderColor: '#7054D5', borderWidth:2}}
                 />
 
-                <ButtonComp btnName={t('Apply')} onPress={() => {console.log("Button Pressed")}} />
+                <ButtonComp btnName={t('Apply')} onPress={() => filterSubmit()} />
             </View>
 
             
@@ -97,4 +106,4 @@ const FilterandSort = ({navigation}) => {
     )
 }
 
-export default FilterandSort;
+export default connect()(FilterandSort);

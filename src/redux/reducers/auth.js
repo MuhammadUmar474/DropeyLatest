@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { GET_CATEGORIES, LOGIN, PASSWORD_RESET, SIGNUP, LOGOUT, GET_ITEMS } from '../types/authTypes';
+import { GET_CATEGORIES, LOGIN, PASSWORD_RESET, SIGNUP, LOGOUT, GET_ITEMS, FILTER_ITEMS } from '../types/authTypes';
 
 const initial_state = {
         name: '',
@@ -8,6 +8,7 @@ const initial_state = {
         items: [],
         message: '',
         itemsforProduct: [],
+        filteredProducts: [],
 }
 
 const getToken = async () => {
@@ -103,6 +104,20 @@ export const getItemsReducer = (state = initial_state, action) => {
             return {
                 ...state,
                 itemsforProduct: payload
+            }
+        default:
+            return {...state}
+    }
+}
+
+export const filterItemsReducer = (state = initial_state, action) => {
+    const {payload} = action;
+    switch(action.type){
+        case FILTER_ITEMS:
+            console.log('data in Filter Item reducer =>', payload);
+            return {
+                ...state,
+                filteredProducts: payload
             }
         default:
             return {...state}

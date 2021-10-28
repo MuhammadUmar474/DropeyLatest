@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_CATEGORIES, LOGIN, PASSWORD_RESET, SIGNUP, LOGOUT, GET_ITEMS } from '../types/authTypes';
+import { GET_CATEGORIES, LOGIN, PASSWORD_RESET, SIGNUP, LOGOUT, GET_ITEMS, FILTER_ITEMS } from '../types/authTypes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as RootNavigation from '../../navigation/RootNavigator';
 import Toast from 'react-native-simple-toast';
@@ -42,7 +42,7 @@ export const signUp = (name, email) => async dispatch => {
     }
 }
 
-export const logIn = (email, password) => async dispatch => {
+export const logIn = (email, password, successCall) => async dispatch => {
     console.log(email, password);
     try {
         await axios.post('http://18.116.113.58/api/login',
@@ -53,10 +53,12 @@ export const logIn = (email, password) => async dispatch => {
         .then(response => {
             console.log(response.data);
             storeToken(response.data.token);
-            return dispatch({
+            dispatch({
                 type: LOGIN,
                 payload: response?.data?.user,
             });
+            successCall && successCall()
+            
         });
         console.log('Login complete');
         RootNavigation.navigate('Drawer');
@@ -81,7 +83,7 @@ export const getCategories = async dispatch => {
     try {
         await axios.get('http://18.116.113.58/api/dropshipper-categories')
         .then(response => {
-            console.log(response?.data?.categories, 'categories from api')
+            console.log('categories from api',response?.data?.categories)
             return dispatch({
                 type: GET_CATEGORIES,
                 payload: response?.data?.categories,
@@ -110,6 +112,31 @@ export const getItems = async dispatch => {
     } catch (error) {
         console.log(error);
         console.log('Items failed while receiving');
+    }
+}
+
+export const filterItems = (sort) => async dispatch => {
+    console.log("Sort By =>", sort);
+    const value = await AsyncStorage.getItem('TokenValue')
+    try {
+        await axios.get('http://18.116.113.58/api/filtered-items', 
+        {  
+            headers: {"Authorization": `Bearer ${value}`}
+        },
+        {
+            orderBy: sort
+        })
+        .then(response => {
+            console.log("Filer Item Action Run");
+            console.log('Filtered Items from api action', response?.data?.data)
+            return dispatch({
+                type: FILTER_ITEMS,
+                payload: response?.data?.data,
+            });
+        });
+    } catch (error) {
+        console.log(error);
+        console.log('Filtered Items failed while receiving');
     }
 }
 

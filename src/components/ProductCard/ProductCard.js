@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, View, Image, Text, ImageBackground } from "react-native";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import ImportListBtn from '../ImportListBtn/ImportListBtn';
 import CheckBox from '@react-native-community/checkbox';
 import styles from './styles';
 
-const ProductCard = (props) => {
+const ProductCard = ({ post, isSelected }) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-
-  const post = props.post;
-  // const image = props.
-  console.log(post)
+  useEffect(() => {
+    setToggleCheckBox(isSelected)
+  }, [isSelected])
+  console.log("post Picture", post?.picture.id)
   return (
-    <TouchableOpacity style={ !toggleCheckBox ? styles.cardContainer : styles.cardContainerSelected} 
+    <TouchableOpacity style={ !toggleCheckBox? styles.cardContainer : styles.cardContainerSelected} 
     onPress = {() => {setToggleCheckBox(!toggleCheckBox)}}>
       <View>
         <View>
           <ImageBackground
-            source={post.productImageUri}
+            source={post?.picture}
             style = {styles.productImg}
           >
             { toggleCheckBox ? (<View>
@@ -47,11 +47,11 @@ const ProductCard = (props) => {
       <Text style={styles.productNameTxt} >{post.name}</Text>
       <View style={{flexDirection: 'row'}}>
         <Text style={styles.productNameTxt} >By</Text>
-        <Text style={styles.storeNameTxt} >{post.ownername}</Text>
+        <Text style={styles.storeNameTxt} >{post?.item_detials?.ownername}</Text>
       </View>
 
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-        <Text style={styles.priceTxt}>{post.sale_price}</Text>
+        <Text style={styles.priceTxt}>{post.sale_price_formatted}</Text>
         <View style={{flexDirection: 'row', marginTop: hp('0.5%')}}>
             <View style={styles.diamondView}>
             <Image
