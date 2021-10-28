@@ -17,7 +17,7 @@ const HomefindProduct = ({navigation}) => {
     const dispatch = useDispatch();
 
     const items = useSelector((state) => state?.getItems);
-    console.log("Product items from api", items.itemsforProduct.data);
+    // console.log("Product items from api in Home Product Screen", items.itemsforProduct.data);
     useEffect(() => {
         dispatch(getItems);
     },[dispatch]);
@@ -96,12 +96,12 @@ const HomefindProduct = ({navigation}) => {
                     
                 </View>
                 </ImageBackground>
-                <View style={{flex: 1, marginTop: hp('-10%')}}>
+                <View style={{flex: 1, marginTop: hp('-12%')}}>
                     <FlatList
                         showsVerticalScrollIndicator = {false}
                         data={items.itemsforProduct.data}
                         numColumns = {2}
-                        renderItem={({item}) => <ProductCard post = {item}/>}
+                        renderItem={({item}) => <ProductCard post = {item} isSelected={isCheckAll}/>}
                     />
 
                     </View>

@@ -1,6 +1,6 @@
 import { applyMiddleware, combineReducers, createStore, compose } from "redux";
 import thunk from "redux-thunk";
-import { getCategoriesReducer, getItemsReducer, loginReducer, logOutReducer, passwordResetReducer, signUpReducer } from './reducers/auth';
+import { filterItemsReducer, getCategoriesReducer, getItemsReducer, loginReducer, logOutReducer, passwordResetReducer, signUpReducer } from './reducers/auth';
 
 const AllReducers = combineReducers({
     signup: signUpReducer,
@@ -9,6 +9,7 @@ const AllReducers = combineReducers({
     passwordReset: passwordResetReducer,
     logut: logOutReducer,
     getItems: getItemsReducer,
+    filterItems: filterItemsReducer,
 })
 
 export const store = createStore(

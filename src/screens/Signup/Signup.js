@@ -97,7 +97,7 @@ import Toast from 'react-native-simple-toast';
         return {key: i.id, label: i.name, value: i.name}
     })
     console.log('array of items is', itemsArray)
-    const [itemss, setItemss] = useState(itemsArray);
+    // const [itemss, setItemss] = useState(itemsArray);
     LogBox.ignoreLogs(['Warning: ...']);
     LogBox.ignoreAllLogs();
 
@@ -188,10 +188,9 @@ import Toast from 'react-native-simple-toast';
                         placeholder = {'Products to sell?(Optional)'}
                         open={open}
                         value={value}
-                        items={itemss}
+                        items={itemsArray}
                         setOpen={setOpen}
                         setValue={setValue}
-                        setItems={setItemss}
                         style={styles.picker}
                         containerStyle={{ width: wp('90%') }}
                         textStyle={{ color: '#777777' }}

@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#7054D5'
     },
   backBtn: {
-    flex: 1,
-    zIndex: 1,
+    // flex: 1,
+    zIndex:1,
     marginTop: hp('6%'),
     marginLeft: wp('4%'),
   },
@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
   },
   picker: {
+    // zIndex: 5,
     width: wp('90%'),
     height: hp('7%'),
     justifyContent: 'center',

@@ -53,6 +53,7 @@ const Styles = StyleSheet.create({
         alignItems: 'center', 
         borderRadius: 5, 
         paddingHorizontal: 5,
+        overflow: 'hidden'
     },
     filterIcon: { 
         height:40, 

@@ -31,6 +31,15 @@ function HomeScreenStack() {
   return (
     <HomeStack.Navigator screenOptions={{headerShown: false }}>
       <HomeStack.Screen name="HomeProduct" component={HomefindProduct} />
+      <HomeStack.Screen name="Find Products" component={FindProducts} />
+      <HomeStack.Screen name="Push Products" component={PushProducts} />
+      <HomeStack.Screen name="My Products" component={MyProducts} />
+      <HomeStack.Screen name="My Orders" component={MyOrders} />
+      <HomeStack.Screen name="Store Settings" component={StoreSettings} />
+      <HomeStack.Screen name="Help Center" component={HelpCenter} />
+      <HomeStack.Screen name="Store List" component={StoreList} />
+      <HomeStack.Screen name="My Profile" component={MyProfile} />
+      <HomeStack.Screen name="Language" component={Language} />
       <HomeStack.Screen name="Filter" component={FilterandSort} />
     </HomeStack.Navigator>
   );
@@ -43,15 +52,6 @@ function AuthScreen() {
       <AuthStack.Screen name="Login" component={Login} />
       <AuthStack.Screen name="Forgot Password" component={ForgotPassword} />
       <AuthStack.Screen name="Drawer" component={DrawerScreen}/>
-      <AuthStack.Screen name="Find Products" component={FindProducts} />
-      <AuthStack.Screen name="Push Products" component={PushProducts} />
-      <AuthStack.Screen name="My Products" component={MyProducts} />
-      <AuthStack.Screen name="My Orders" component={MyOrders} />
-      <AuthStack.Screen name="Store Settings" component={StoreSettings} />
-      <AuthStack.Screen name="Help Center" component={HelpCenter} />
-      <AuthStack.Screen name="Store List" component={StoreList} />
-      <AuthStack.Screen name="My Profile" component={MyProfile} />
-      <AuthStack.Screen name="Language" component={Language} />
     </AuthStack.Navigator>
   );
 }
