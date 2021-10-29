@@ -117,7 +117,7 @@ export const filterItemsReducer = (state = initial_state, action) => {
             console.log('data in Filter Item reducer =>', payload);
             return {
                 ...state,
-                filteredProducts: payload
+                itemsforProduct: payload
             }
         default:
             return {...state}

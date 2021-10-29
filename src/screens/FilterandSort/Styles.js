@@ -37,8 +37,18 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     borderWidth: 0.5,
   },
-  picker: {
-    // zIndex: 5,
+  pickerSort: {
+    width: wp('90%'),
+    height: hp('7%'),
+    justifyContent: 'center',
+    elevation: 1,
+    borderRadius: 3,
+    marginTop: hp('1%'),
+    borderWidth: 0.2,
+    
+  },
+  pickerCurrency: {
+    zIndex: 1,
     width: wp('90%'),
     height: hp('7%'),
     justifyContent: 'center',
@@ -57,6 +67,12 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'Montserrat-Medium',
     color: '#777777'
+  },
+  openedCurrencyDropDown: {
+    minHeight: 160,
+  },
+  openedSortDropDown: {
+    minHeight: 250,
   }
 });
 
