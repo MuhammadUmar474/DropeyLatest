@@ -10,14 +10,15 @@ import { getItems } from '../../redux/actions/auth';
 import styles from './styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ProductCard from '../../components/ProductCard/ProductCard';
-const HomefindProduct = ({navigation}) => {
+const HomefindProduct = ({navigation, route}) => {
     const [isCheckAll, setIsCheckAll] = useState(false);
     const [searchProduct, setSearchProduct] = useState();
 
     const dispatch = useDispatch();
+    let SortReceived = route.params;
+    console.log("Sort Received", SortReceived);
 
     const items = useSelector((state) => state?.getItems);
-    // console.log("Product items from api in Home Product Screen", items.itemsforProduct.data);
     useEffect(() => {
         dispatch(getItems);
     },[dispatch]);

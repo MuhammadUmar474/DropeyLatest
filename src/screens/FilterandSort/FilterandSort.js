@@ -34,12 +34,12 @@ const FilterandSort = ({navigation}) => {
         {label: 'Euro', value: 'Euro'},
         {label: 'Rupee', value: 'Rupee'}
     ]);
-
+    
     const filterSubmit = () => {
         dispatch(filterItems(sort))
-        
+        navigation.navigate('HomeProduct', {SortBy: sort})
     }
-
+    console.log("Open Sort", sort);
     return (
         <View style={styles.container}>
 
@@ -102,7 +102,7 @@ const FilterandSort = ({navigation}) => {
                     chipStyleSelected={{backgroundColor: '#FFFFFF', borderColor: '#7054D5', borderWidth:2}}
                 />
 
-                <ButtonComp btnName={t('Apply')} onPress={() => filterSubmit()} />
+                <ButtonComp btnName={t('Apply')} onPress={() => {sort ? filterSubmit() : navigation.navigate('HomeProduct')}} />
             </View>
 
             
