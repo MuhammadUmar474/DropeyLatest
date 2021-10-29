@@ -12,16 +12,23 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import ProductCard from '../../components/ProductCard/ProductCard';
 const HomefindProduct = ({navigation, route}) => {
     const [isCheckAll, setIsCheckAll] = useState(false);
+    const [isSelectAll, setIsSelectAll] = useState(false);
     const [searchProduct, setSearchProduct] = useState();
 
     const dispatch = useDispatch();
-    let SortReceived = route.params;
-    console.log("Sort Received", SortReceived);
+    let sortReceived = route.params;
+    console.log("Sort Received", sortReceived);
 
     const items = useSelector((state) => state?.getItems);
     useEffect(() => {
+        if(!sortReceived){
         dispatch(getItems);
+    }
     },[dispatch]);
+
+    const setSelectAll = (value) => {
+       setIsSelectAll(value);
+    }
     return (
         <View style={styles.container}>
             <View style={{flex: 1}}>
@@ -78,8 +85,11 @@ const HomefindProduct = ({navigation, route}) => {
                         <CheckBox
                             // boxType = 'circle'
                             name = "SelectAll"
-                            value={isCheckAll}
-                            onValueChange={(newValue) => setIsCheckAll(newValue)}
+                            value={isSelectAll}
+                            onValueChange={(newValue) => {
+                              setIsCheckAll(newValue); 
+                              setIsSelectAll(newValue)
+                            }}
                             tintColors = {{ true: '#61C064' , false: '#FFFFFF' }}
                         />
                         <Text style={styles.selectAllTxt} >Select All</Text>
@@ -102,7 +112,7 @@ const HomefindProduct = ({navigation, route}) => {
                         showsVerticalScrollIndicator = {false}
                         data={items.itemsforProduct.data}
                         numColumns = {2}
-                        renderItem={({item}) => <ProductCard post = {item} isSelected={isCheckAll}/>}
+                        renderItem={({item}) => <ProductCard post = {item} isSelected={isCheckAll} setSelectAll={setSelectAll}/>}
                     />
 
                     </View>
