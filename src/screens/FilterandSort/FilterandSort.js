@@ -55,32 +55,36 @@ const FilterandSort = ({navigation}) => {
             </View>
 
             <View style={{ alignItems: 'center', marginTop: hp('3%'), marginHorizontal: wp('5%')}}>
-
-                <DropDownPicker
-                    placeholder = {'Sort By'}
-                    open={openSort}
-                    value={sort}
-                    items={sortItems}
-                    setOpen={setOpenSort}
-                    setValue={setSort}
-                    setItems={setSortItems}
-                    style={styles.picker}
-                    containerStyle={{ width: wp('90%')}}
-                    textStyle={{ color: '#777777' }}
-                />
-
-                <DropDownPicker
-                    placeholder = {'Currency'}
-                    open={openCurrency}
-                    value={currency}
-                    items={currencyItem}
-                    setOpen={setOpenCurrency}
-                    setValue={setCurrency}
-                    setItems={setCurrencyItem}
-                    style={styles.picker}
-                    containerStyle={{ width: wp('90%') }}
-                    textStyle={{ color: '#777777' }}
-                />
+                <View style={openSort ? styles.openedSortDropDown : null}>
+                    <DropDownPicker
+                        placeholder = {'Sort By'}
+                        open={openSort}
+                        value={sort}
+                        items={sortItems}
+                        setOpen={setOpenSort}
+                        setValue={setSort}
+                        setItems={setSortItems}
+                        style={styles.pickerSort}
+                        dropDownContainerStyle={{borderWidth: 0.2}}
+                        containerStyle={{ width: wp('90%')}}
+                        textStyle={{ color: '#777777' }}
+                    />
+                </View>
+                <View style={openCurrency ? styles.openedCurrencyDropDown : null}>
+                    <DropDownPicker
+                        placeholder = {'Currency'}
+                        open={openCurrency}
+                        value={currency}
+                        items={currencyItem}
+                        setOpen={setOpenCurrency}
+                        setValue={setCurrency}
+                        setItems={setCurrencyItem}
+                        style={styles.pickerCurrency}
+                        dropDownContainerStyle={{borderWidth: 0.2}}
+                        containerStyle={{ width: wp('90%') }}
+                        textStyle={{ color: '#777777' }}
+                    />
+                </View>
             </View>
             <View style={{ marginTop: hp('3%'), marginHorizontal: wp('5%') }}>
                 <Text style={styles.filterTxt}>Filters</Text>
